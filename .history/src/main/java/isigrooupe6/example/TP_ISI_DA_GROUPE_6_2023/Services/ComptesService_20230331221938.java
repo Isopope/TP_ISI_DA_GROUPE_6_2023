@@ -28,7 +28,6 @@ public class ComptesService {
     public Comptes saveComptes(Comptes comptes){
         String generated = generateUniqueRandomString(5);
         comptes.setCompte_numero(generated + LocalDate.now().getYear());
-        comptes.setSolde_compte(0.0);
 
         return cr.save(comptes);
     }
