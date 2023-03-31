@@ -14,7 +14,7 @@ public class ClientsService {
 
     public List<Clients> showClients(){
 
-        return null;
+        return cr.findAll();
     }
 
     public Clients saveClients(Clients clients){
@@ -23,12 +23,11 @@ public class ClientsService {
     }
 
     public void deleteClients(Integer id){
-
-
+        cr.deleteById(id);
     }
 
     public Clients findOneClients(Integer id){
 
-        return null;
+        return cr.findById(id).get();
     }
 }
