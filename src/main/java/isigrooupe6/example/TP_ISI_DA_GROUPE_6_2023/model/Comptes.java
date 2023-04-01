@@ -15,7 +15,11 @@ import lombok.NoArgsConstructor;
 public class Comptes {
 
 	@Id
+<<<<<<< HEAD
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+=======
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+>>>>>>> humbert
     private int id;
     private String compte_numero;
 	private String type_compte;

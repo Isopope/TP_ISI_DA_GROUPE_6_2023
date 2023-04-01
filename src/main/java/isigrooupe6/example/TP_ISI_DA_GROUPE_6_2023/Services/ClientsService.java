@@ -18,12 +18,13 @@ public class ClientsService {
 
     public List<Clients> showClients(){
 
-        return null;
+        return cr.findAll();
     }
 
     public Clients saveClients(Clients clients){
 
         return cr.save(clients);
+<<<<<<< HEAD
     }
 
     public ResponseEntity<Clients> updateClients(@PathVariable Integer id, @RequestBody Clients newClient){
@@ -45,15 +46,16 @@ public class ClientsService {
         Clients updateClient = cr.save(oldClients);
 
         return ResponseEntity.ok(updateClient);
+=======
+>>>>>>> humbert
     }
 
     public void deleteClients(Integer id){
-
-
+        cr.deleteById(id);
     }
 
     public Clients findOneClients(Integer id){
 
-        return null;
+        return cr.findById(id).get();
     }
 }
