@@ -19,16 +19,5 @@ public class TpIsiDaGroupe62023Application {
 	public static void main(String[] args) {
 		SpringApplication.run(TpIsiDaGroupe62023Application.class, args);
 	}
-	@Bean
-	public CommandLineRunner start(){
-		return args -> {
-			cr.save(new Clients(1,"agoe","bp235","masculin","togolais","nkouba","humbert","masculin",LocalDate.of(2002,03,25)));
-			cr.save(new Clients(2,"minamadou","bp235","masculin","togolais","nkouba","humbert","masculin",LocalDate.of(2002,03,25)));
-			//cr.deleteById(1);
-
-
-
-		};
-	}
-
+	
 }

@@ -26,7 +26,7 @@ public class ComptesService {
 
     public List<Comptes> showComptes(){
 
-        return cr.findAll();
+        return null;
     }
 
     public Comptes saveComptes(Comptes comptes){
@@ -48,15 +48,13 @@ public class ComptesService {
         oldComptes.setSolde_compte(newComptes.getSolde_compte());
 
         Comptes updateComptes = cr.save(oldComptes);
-        return ResponseEntity.ok(updateComptes);
     }
     public void deleteComptes(Integer id){
-        cr.deleteById(id);
 
     }
 
     public Comptes findOneComptes(Integer id){
 
-        return cr.findById(id).get();
+        return null;
     }
 }
