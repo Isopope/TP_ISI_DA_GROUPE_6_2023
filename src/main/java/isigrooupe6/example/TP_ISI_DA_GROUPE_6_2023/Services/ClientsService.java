@@ -19,7 +19,7 @@ public class ClientsService {
 
     public Clients saveClients(Clients clients){
 
-        return clients;
+        return cr.save(clients);
     }
 
     public void deleteClients(Integer id){
