@@ -15,8 +15,6 @@ import lombok.NoArgsConstructor;
 public class Comptes {
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
     private String compte_numero;
 	private String type_compte;
     private LocalDate date_creation;

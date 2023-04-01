@@ -48,7 +48,6 @@ public class ComptesService {
         oldComptes.setSolde_compte(newComptes.getSolde_compte());
 
         Comptes updateComptes = cr.save(oldComptes);
-        return ResponseEntity.ok(updateComptes);
     }
     public void deleteComptes(Integer id){
 
