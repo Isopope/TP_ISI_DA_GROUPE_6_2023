@@ -13,6 +13,5 @@ public class TpIsiDaGroupe62023Application {
 	public static void main(String[] args) {
 		SpringApplication.run(TpIsiDaGroupe62023Application.class, args);
 	}
-	
 
 }
