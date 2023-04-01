@@ -2,6 +2,7 @@ package isigrooupe6.example.TP_ISI_DA_GROUPE_6_2023.controllers;
 
 import java.util.List;
 
+import isigrooupe6.example.TP_ISI_DA_GROUPE_6_2023.Repositories.ComptesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +19,8 @@ import isigrooupe6.example.TP_ISI_DA_GROUPE_6_2023.model.Comptes;
 public class ComptesController {
     @Autowired
     ComptesService cs;
+    @Autowired
+    ComptesRepository cr;
 
     @PostMapping("/ajouterComptes")
     //@ResponseBody
@@ -42,7 +45,19 @@ public class ComptesController {
     //@ResponseBody
     public Comptes updateComptes(@PathVariable Integer id, @RequestBody Comptes comptes){
         comptes.setId(id);
-        return cs.saveComptes(comptes);
+        return cs.updateComptes(id, comptes).getBody();
     }
+    @PutMapping("versementComptes/{id}")
+    public Comptes versementComptes(@PathVariable Integer id,@RequestBody Comptes comptes){
+        comptes.setId(id);
+        return cs.versementMontant(id,comptes).getBody();
+    }
+
+    @PutMapping("retraitComptes/{id}")
+    public Comptes retraitComptes(@PathVariable Integer id,@RequestBody Comptes comptes){
+        comptes.setId(id);
+        return cs.retraitMontant(id,comptes).getBody();
+    }
+
 
 }

@@ -1,12 +1,14 @@
 package isigrooupe6.example.TP_ISI_DA_GROUPE_6_2023.Services;
 
 import isigrooupe6.example.TP_ISI_DA_GROUPE_6_2023.Repositories.ComptesRepository;
+import isigrooupe6.example.TP_ISI_DA_GROUPE_6_2023.model.Clients;
 import isigrooupe6.example.TP_ISI_DA_GROUPE_6_2023.model.Comptes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -36,7 +38,36 @@ public class ComptesService {
 
         return cr.save(comptes);
     }
+    public ResponseEntity<Comptes> versementMontant(@PathVariable Integer id, @RequestBody Comptes newComptes){
+        Optional<Comptes> comptes = cr.findById(id);
+        if (!comptes.isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
 
+        Comptes oldComptes = comptes.get();
+        oldComptes.setSolde_compte(oldComptes.getSolde_compte()+ newComptes.getSolde_compte());
+
+        Comptes versementMontant = cr.save(oldComptes);
+        return ResponseEntity.ok(versementMontant);
+    }
+
+    public ResponseEntity<Comptes> retraitMontant(@PathVariable Integer id, @RequestBody Comptes newComptes){
+        Optional<Comptes> comptes = cr.findById(id);
+        if (!comptes.isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        Comptes oldComptes = comptes.get();
+        double montant=newComptes.getSolde_compte();
+        if(oldComptes.getSolde_compte()< montant|| montant<0.0){
+            return ResponseEntity.notFound().build();
+        }else{
+            oldComptes.setSolde_compte(oldComptes.getSolde_compte()-newComptes.getSolde_compte());
+            Comptes retraittMontant = cr.save(oldComptes);
+            return ResponseEntity.ok(retraittMontant);
+        }
+
+    }
     public ResponseEntity<Comptes> updateComptes(@PathVariable Integer id, @RequestBody Comptes newComptes){
         Optional<Comptes> comptes = cr.findById(id);
         if (!comptes.isPresent()) {
@@ -50,6 +81,8 @@ public class ComptesService {
         Comptes updateComptes = cr.save(oldComptes);
         return ResponseEntity.ok(updateComptes);
     }
+
+
     public void deleteComptes(Integer id){
         cr.deleteById(id);
 
@@ -59,4 +92,6 @@ public class ComptesService {
 
         return cr.findById(id).get();
     }
+
+
 }
