@@ -24,8 +24,9 @@ public class ClientsService {
     public Clients saveClients(Clients clients){
 
         return cr.save(clients);
+<<<<<<< HEAD
     }
-
+    
     public ResponseEntity<Clients> updateClients(@PathVariable Integer id, @RequestBody Clients newClient){
         Optional<Clients> clients = cr.findById(id);
         if (!clients.isPresent()) {
@@ -45,6 +46,8 @@ public class ClientsService {
         Clients updateClient = cr.save(oldClients);
 
         return ResponseEntity.ok(updateClient);
+=======
+>>>>>>> humbert
     }
 
     public void deleteClients(Integer id){
