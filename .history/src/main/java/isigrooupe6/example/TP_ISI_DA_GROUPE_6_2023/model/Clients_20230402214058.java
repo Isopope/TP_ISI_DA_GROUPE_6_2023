@@ -8,7 +8,7 @@ import java.util.List;
 import lombok.Data;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-//import net.minidev.json.annotate.JsonIgnore;
+import net.minidev.json.annotate.JsonIgnore;
 
 @Entity
 @Table(name = "Clients")
