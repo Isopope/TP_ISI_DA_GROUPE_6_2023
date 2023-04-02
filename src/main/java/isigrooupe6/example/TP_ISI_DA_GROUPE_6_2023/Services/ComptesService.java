@@ -51,6 +51,26 @@ public class ComptesService {
         return ResponseEntity.ok(versementMontant);
     }
 
+    public void virementComptes(int numero_source,int numero_destination,double montant){
+        Comptes source= findOneComptes(numero_source);
+        Comptes destination=findOneComptes(numero_destination);
+        if(source==null || destination==null){
+            ResponseEntity.badRequest().body("comptes inexistant.");
+
+        }
+        if(source.getSolde_compte()<montant){
+            ResponseEntity.badRequest().body("Solde insuffisant.");
+        }else{
+            source.setSolde_compte(source.getSolde_compte()-montant);
+            destination.setSolde_compte(destination.getSolde_compte()+montant);
+            cr.save(source);
+            cr.save(destination);
+        }
+        ResponseEntity.ok("oeration effectué avec succes");
+
+
+    }
+
     public ResponseEntity<Comptes> retraitMontant(@PathVariable Integer id, @RequestBody Comptes newComptes){
         Optional<Comptes> comptes = cr.findById(id);
         if (!comptes.isPresent()) {
@@ -63,8 +83,8 @@ public class ComptesService {
             return ResponseEntity.notFound().build();
         }else{
             oldComptes.setSolde_compte(oldComptes.getSolde_compte()-newComptes.getSolde_compte());
-            Comptes retraittMontant = cr.save(oldComptes);
-            return ResponseEntity.ok(retraittMontant);
+            Comptes retraitMontant = cr.save(oldComptes);
+            return ResponseEntity.ok(retraitMontant);
         }
 
     }

@@ -4,13 +4,8 @@ import java.util.List;
 
 import isigrooupe6.example.TP_ISI_DA_GROUPE_6_2023.Repositories.ComptesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import isigrooupe6.example.TP_ISI_DA_GROUPE_6_2023.Services.ComptesService;
 import isigrooupe6.example.TP_ISI_DA_GROUPE_6_2023.model.Comptes;
@@ -57,6 +52,10 @@ public class ComptesController {
     public Comptes retraitComptes(@PathVariable Integer id,@RequestBody Comptes comptes){
         comptes.setId(id);
         return cs.retraitMontant(id,comptes).getBody();
+    }
+    @PutMapping("virementComptes")
+    public void virementComptes(@RequestParam("source") int source, @RequestParam("destination") int destination, @RequestParam("montant") double montant){
+       cs.virementComptes(source, destination, montant);
     }
 
 
