@@ -34,6 +34,7 @@ public class ComptesService {
     public Comptes saveComptes(Comptes comptes){
         String generated = generateUniqueRandomString(5);
         comptes.setCompte_numero(generated + LocalDate.now().getYear());
+        comptes.setDate_creation(LocalDate.now());
         comptes.setSolde_compte(0.0);
 
         return cr.save(comptes);
@@ -45,10 +46,14 @@ public class ComptesService {
         }
 
         Comptes oldComptes = comptes.get();
-        oldComptes.setSolde_compte(oldComptes.getSolde_compte()+ newComptes.getSolde_compte());
-
+        if(newComptes.getSolde_compte()<=0.0  ){
+            ResponseEntity.badRequest().body("montant inferieur ou egale à 0");
+        }else{
+            oldComptes.setSolde_compte(oldComptes.getSolde_compte()+ newComptes.getSolde_compte());
+        }
         Comptes versementMontant = cr.save(oldComptes);
         return ResponseEntity.ok(versementMontant);
+
     }
 
     public void virementComptes(int numero_source,int numero_destination,double montant){
@@ -58,7 +63,7 @@ public class ComptesService {
             ResponseEntity.badRequest().body("comptes inexistant.");
 
         }
-        if(source.getSolde_compte()<montant){
+        if(source.getSolde_compte()<montant || montant<0.0 || montant==0.0){
             ResponseEntity.badRequest().body("Solde insuffisant.");
         }else{
             source.setSolde_compte(source.getSolde_compte()-montant);
@@ -66,7 +71,7 @@ public class ComptesService {
             cr.save(source);
             cr.save(destination);
         }
-        ResponseEntity.ok("oeration effectué avec succes");
+        ResponseEntity.ok("operation effectué avec succes");
 
 
     }
@@ -79,7 +84,7 @@ public class ComptesService {
 
         Comptes oldComptes = comptes.get();
         double montant=newComptes.getSolde_compte();
-        if(oldComptes.getSolde_compte()< montant|| montant<0.0){
+        if(oldComptes.getSolde_compte()< montant|| montant<0.0 || montant==0.0){
             return ResponseEntity.notFound().build();
         }else{
             oldComptes.setSolde_compte(oldComptes.getSolde_compte()-newComptes.getSolde_compte());
@@ -97,6 +102,8 @@ public class ComptesService {
         Comptes oldComptes = comptes.get();
         oldComptes.setType_compte(newComptes.getType_compte());
         oldComptes.setSolde_compte(newComptes.getSolde_compte());
+        //nouvelle ligne
+        oldComptes.setDate_creation(newComptes.getDate_creation());
 
         Comptes updateComptes = cr.save(oldComptes);
         return ResponseEntity.ok(updateComptes);
