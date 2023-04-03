@@ -1,15 +1,12 @@
 package isigrooupe6.example.TP_ISI_DA_GROUPE_6_2023.Services;
 
 import isigrooupe6.example.TP_ISI_DA_GROUPE_6_2023.Repositories.ComptesRepository;
-import isigrooupe6.example.TP_ISI_DA_GROUPE_6_2023.model.Clients;
 import isigrooupe6.example.TP_ISI_DA_GROUPE_6_2023.model.Comptes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;

@@ -4,7 +4,6 @@ import java.util.List;
 
 import isigrooupe6.example.TP_ISI_DA_GROUPE_6_2023.Repositories.ComptesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import isigrooupe6.example.TP_ISI_DA_GROUPE_6_2023.Services.ComptesService;

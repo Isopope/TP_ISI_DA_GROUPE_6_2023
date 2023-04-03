@@ -2,7 +2,6 @@ package isigrooupe6.example.TP_ISI_DA_GROUPE_6_2023.model;
 
 import java.time.LocalDate;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
