@@ -18,26 +18,22 @@ public class ComptesController {
     ComptesRepository cr;
 
     @PostMapping("/ajouterComptes")
-    //@ResponseBody
     public Comptes saveCompte(@RequestBody  Comptes comptes){
         return cs.saveComptes(comptes);
 
     }
 
     @GetMapping("/listeComptes")
-    //@ResponseBody
     public List<Comptes> showComptes(){
         return cs.showComptes();
     }
 
     @DeleteMapping("/deleteComptes/{id}")
-    //@ResponseBody
     public void deleteComptes(@PathVariable Integer id){
         cs.deleteComptes(id);
     }
 
     @PutMapping("updateComptes/{id}")
-    //@ResponseBody
     public Comptes updateComptes(@PathVariable Integer id, @RequestBody Comptes comptes){
         comptes.setId(id);
         return cs.updateComptes(id, comptes).getBody();

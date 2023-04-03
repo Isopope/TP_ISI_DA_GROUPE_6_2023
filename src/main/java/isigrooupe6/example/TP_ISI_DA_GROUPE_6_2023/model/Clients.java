@@ -24,7 +24,9 @@ public class Clients {
     private String prenom;
     private String sexe;
     private String adresse;
+    @Column(unique = true)
     private String telephone;
+    @Column(unique = true)
     private String courriel;
     private String nationalite;
     private LocalDate date_naissance;
